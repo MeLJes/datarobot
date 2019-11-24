@@ -110,9 +110,17 @@
   // --- Positions
   #positions {
     @include flex(flex, space-between, flex-start, row, wrap);
+    @include tr;
+    @include touch(none);
 
+    opacity: 0;
     margin-bottom: px-to-rem(40);
 
+    &.loaded {
+      opacity: 1;
+
+      @include touch(auto);
+    }
     .item {
       border: px-to-rem(1) solid color(light-gray);
       padding: px-to-rem(24);

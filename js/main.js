@@ -8,10 +8,9 @@ async function getData() {
   const departments = Object.keys(data.departments).map(i => data.departments[i]).sort(function (a, b) {
     return a.name[0].localeCompare(b.name[0]);
   });
-  console.log(departments);
 
   let departmentsData = `
-    <li class="dropdown-item" data-department-id="0">
+    <li class="dropdown-item" data-department-id="all">
       All departments
     </li>`;
   departmentsData += departments.map(function (item) {
@@ -27,6 +26,9 @@ async function getData() {
     item.addEventListener('click', () => {
       dropdownActive.innerHTML = item.innerHTML;
       dropdownActive.dataset.departmentId = item.dataset.departmentId;
+
+      _positionsRender(item.dataset.departmentId);
+
       document.getElementById('dropdown-items').classList.remove('active');
     });
   });
@@ -44,67 +46,128 @@ async function getData() {
       }
     });
 
-    /*var getFilm = films.find(function (film) {
-      return film.id === filmId;
-    });*/
-
     return itemName.name;
   }
 
-  let jobsDepartmentsUpdate = jobs.map(function (item) {
-    // console.log('in let');
-    // let test = updateDepartmentName(departments, item.departments[0]);
+  jobs.map(function (item) {
     item.departmentName = updateDepartmentName(departments, item.departments[0]);
-    // console.log(test);
-    // item.departmentName =
-    // item.departmentName = 'test';
-    /*console.log('item department');
-    console.log(item.departments[0]);
-    console.log(item.departmentName);
-    console.log(item);
-    console.log(departments);*/
-
-    // let departmentIdToName = ;
-    // console.log('here');
-    // console.log(updateDepartmentName(departments, item.departments[0]));
-
-    console.log(item);
   });
 
-  let jobsData = jobs.map(function (item) {
-    return `
-      <div class="item" data-item-number="" data-item-department="${item.departments}">
-        <h2 data-position="${item.title}">
-          <a href="${item.absolute_url}">${item.title}</a>
-        </h2>
+  function _positionsRender(departmentId) {
+    if (dropdownActive.dataset.departmentId === 'all') {
+      positions.classList.remove('loaded');
 
-        <div class="info">
-          <div class="city" data-item-city="${item.location.name}">
-            <div class="media-holder">
-              <img src="icons/city.svg" alt="DataRobot" />
-            </div><!-- .media-holder -->
+      setTimeout(function () {
+        positions.innerHTML = jobs.map(function (item) {
+          return `
+        <div class="item" data-item-number="" data-item-department="${item.departments}">
+          <h2 data-position="${item.title}">
+            <a href="${item.absolute_url}">${item.title}</a>
+          </h2>
 
-            ${item.location.name}
-          </div><!-- .city -->
+          <div class="info">
+            <div class="city" data-item-city="${item.location.name}">
+              <div class="media-holder">
+                <img src="icons/city.svg" alt="DataRobot" />
+              </div><!-- .media-holder -->
 
-          <div class="department" data-item-department="${item.departments}">
-            <div class="media-holder">
-              <img src="icons/department.svg" alt="DataRobot" />
-            </div><!-- .media-holder -->
+              ${item.location.name}
+            </div><!-- .city -->
 
-            ${item.departmentName}
-          </div><!-- .place -->
-        </div><!-- .info -->
+            <div class="department" data-item-department="${item.departments}">
+              <div class="media-holder">
+                <img src="icons/department.svg" alt="DataRobot" />
+              </div><!-- .media-holder -->
 
-        <a href="${item.absolute_url}" class="more">
-          Learn more
+              ${item.departmentName}
+            </div><!-- .place -->
+          </div><!-- .info -->
 
-          <img src="icons/more.svg" alt="DataRobot" />
-        </a><!-- .more -->
-      </div><!-- .item -->`;
-  }).join('');
+          <a href="${item.absolute_url}" class="more">
+            Learn more
 
-  positions.innerHTML = jobsData;
+            <img src="icons/more.svg" alt="DataRobot" />
+          </a><!-- .more -->
+        </div><!-- .item -->`;
+        }).join('');
+      }, 250);
+
+      setTimeout(function () {
+        positions.classList.add('loaded');
+      }, 325);
+    } else {
+      let loopCheck = 0;
+      let jobsCounter = jobs.reduce(function (jobsCounter, item) {
+        jobsCounter[item.departments[0]] ? jobsCounter[item.departments[0]]++ : jobsCounter[item.departments[0]] = 1;
+
+        return jobsCounter;
+      }, {});
+      let jobsCheck = Object.keys(jobsCounter).forEach(function(item) {
+        if (item === departmentId) {
+          loopCheck = 1;
+        }
+      });
+
+
+      if (loopCheck === 1) {
+        positions.classList.remove('loaded');
+
+        setTimeout(function () {
+          let jobsFiltered = jobs.filter(function (item) {
+            return item.departments == parseInt(departmentId);
+          });
+
+          positions.innerHTML = jobsFiltered.map(function (item) {
+            return `
+          <div class="item" data-item-number="" data-item-department="${item.departments}">
+            <h2 data-position="${item.title}">
+              <a href="${item.absolute_url}">${item.title}</a>
+            </h2>
+
+            <div class="info">
+              <div class="city" data-item-city="${item.location.name}">
+                <div class="media-holder">
+                  <img src="icons/city.svg" alt="DataRobot" />
+                </div><!-- .media-holder -->
+
+                ${item.location.name}
+              </div><!-- .city -->
+
+              <div class="department" data-item-department="${item.departments}">
+                <div class="media-holder">
+                  <img src="icons/department.svg" alt="DataRobot" />
+                </div><!-- .media-holder -->
+
+                ${item.departmentName}
+              </div><!-- .place -->
+            </div><!-- .info -->
+
+            <a href="${item.absolute_url}" class="more">
+              Learn more
+
+              <img src="icons/more.svg" alt="DataRobot" />
+            </a><!-- .more -->
+          </div><!-- .item -->`;
+          }).join('');
+        }, 250);
+
+        setTimeout(function () {
+          positions.classList.add('loaded');
+        }, 325);
+      } else {
+        positions.classList.remove('loaded');
+
+        setTimeout(function () {
+          positions.innerHTML = `<h2 class="empty">There is no open positions for this category</h2>`
+        }, 250);
+
+        setTimeout(function () {
+          positions.classList.add('loaded');
+        }, 325);
+      }
+    }
+  }
+  _positionsRender();
 }
 getData();
 
@@ -140,6 +203,4 @@ getData();
     document.body.classList.remove('loading');
     document.body.classList.add('loaded');
   });
-  // window.addEventListener('scroll', funcName);
-  // window.addEventListener('resize', funcName);
 })();
