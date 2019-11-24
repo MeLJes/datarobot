@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>DataRobot - Our open positions</title>
+
+  <link rel="icon" href="images/favicon.png" type="images/x-icon" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Titillium+Web:400,600,700&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    :root {
+      --default: #23232D;
+      --primary: #2D8FE2;
+      --secondary: #53718F;
+      --extra: #E1E8F0;
+
+      --white: #ffffff;
+      --black: #000000;
+      --gray: #808080;
+      --light-gray: #D0D8E2;
+      --dark-gray: #656565;
+
+      --success: #b1d845;
+      --warning: #ffeaa7;
+      --error: #e41c1c;
+    }
+  </style>
+</head>
+<body class="loading">
+
+  <div class="loader">
+    <div class="logo">
+      <img src="images/logo.svg" alt="DataRobot" />
+    </div><!-- .logo -->
+
+    <div class="spinner">
+      <img src="icons/loaders/loader.svg" alt="DataRobot">
+    </div><!-- .spinner -->
+  </div><!-- .loader -->
+
+  <div class="main-content">
+    <div class="header">
+      <h1>Our open positions</h1>
+
+      <div id="dropdown" class="dropdown">
+        <button type="button" id="active-item" data-department-id="0">
+          All departments
+        </button><!-- .active-item -->
+
+        <ul id="dropdown-items"></ul><!-- .dropdown-items -->
+      </div><!-- .dropdown -->
+    </div><!-- .header -->
+
+    <div id="positions" class="positions">
+    </div><!-- .positions -->
+
+    <div class="pagination">
+      <div class="item active" data-page-number="">1</div><!-- .item -->
+      <div class="item" data-page-number="">2</div><!-- .item -->
+      <div class="item" data-page-number="">3</div><!-- .item -->
+    </div><!-- .pagination -->
+  </div><!-- .main-content -->
+
+  <!-- Scripts -->
+  <script src="js/main.js"></script>
+</body>
+</html>

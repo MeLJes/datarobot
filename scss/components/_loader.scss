@@ -1,0 +1,56 @@
+.loader {
+  @include flex(flex, center, center, column);
+  @include position(extended, fixed, 0, 0, 0, 0);
+  @include touch(none);
+  @include tr;
+
+  background: color(white);
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+
+  .logo {
+    width: 50vw;
+    max-width: px-to-rem(300);
+    margin-bottom: px-to-rem(75);
+
+    img {
+      height: auto;
+      width: 100%;
+      max-width: px-to-rem(300);
+      margin: 0 auto;
+    }
+  }
+  .spinner {
+    width: px-to-rem(70);
+    height: px-to-rem(70);
+
+    img,
+    svg {
+      width: 100%;
+    }
+  }
+}
+
+body {
+  .main-content {
+    @include touch(none);
+
+    opacity: 0;
+  }
+
+  // Loading | Loaded
+  &.loading {
+    overflow: hidden;
+  }
+  &.loaded {
+    .loader {
+      opacity: 0;
+    }
+    .main-content {
+      @include touch(auto);
+
+      opacity: 1;
+    }
+  }
+}

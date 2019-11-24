@@ -1,0 +1,43 @@
+// --- Buttons
+a.button,
+button.button {
+  @include flex(flex, center, center);
+
+  background: color(primary);
+
+  // --- Hover
+  &:hover {
+    background: color(secondary);
+  }
+}
+
+// --- Back to top
+.back-to-top {
+  @include position(extended, fixed, auto, 30, 30);
+
+  height: px-to-em(45);
+  width: px-to-em(45);
+  overflow: hidden;
+  visibility: hidden;
+  opacity: 0;
+
+  &.btt-is-visible {
+    visibility: visible;
+    opacity: 1;
+  }
+  &.btt-fade-out {
+    opacity: .5;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+  .no-touch &:hover {
+    opacity: 1;
+  }
+
+  // --- Icon
+  svg {
+    fill: color(white);
+  }
+}

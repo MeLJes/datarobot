@@ -1,0 +1,72 @@
+// --- Replace default checkbox and radio buttons icon
+[type="checkbox"]:not(:checked),
+[type="checkbox"]:checked,
+[type="radio"]:not(:checked),
+[type="radio"]:checked  {
+  position: absolute;
+  left: px-to-rem(-9999);
+}
+[type="checkbox"]:not(:checked) + .wpcf7-list-item-label,
+[type="checkbox"]:checked + .wpcf7-list-item-label,
+[type="radio"]:not(:checked) + .wpcf7-list-item-label,
+[type="radio"]:checked + .wpcf7-list-item-label {
+  cursor: pointer;
+  padding-left: px-to-em(30);
+  position: relative;
+}
+
+// --- Aspect
+[type="checkbox"]:not(:checked) + .wpcf7-list-item-label::before,
+[type="checkbox"]:checked + .wpcf7-list-item-label::before,
+[type="checkbox"]:not(:checked) + .wpcf7-list-item-label::after,
+[type="checkbox"]:checked + .wpcf7-list-item-label::after,
+[type="radio"]:not(:checked) + .wpcf7-list-item-label::before,
+[type="radio"]:checked + .wpcf7-list-item-label::before,
+[type="radio"]:not(:checked) + .wpcf7-list-item-label::after,
+[type="radio"]:checked + .wpcf7-list-item-label::after {
+  @include square(20, px);
+  @include position(base, absolute, auto, auto, auto, 0);
+  @include tr(all, 0.075);
+
+  transform: translateY(-50%);
+
+  top: 50%;
+}
+
+// --- Unchecked aspect
+[type="checkbox"]:not(:checked) + .wpcf7-list-item-label::before,
+[type="checkbox"]:checked + .wpcf7-list-item-label::before {
+  content: '';
+  background: url('../icons/checkbox.svg') no-repeat center center;
+  background-size: contain;
+}
+[type="radio"]:not(:checked) + .wpcf7-list-item-label::before,
+[type="radio"]:checked + .wpcf7-list-item-label::before {
+  content: '';
+  background: url('../icons/radio.svg') no-repeat center center;
+  background-size: contain;
+}
+
+// --- Checked aspect
+[type="checkbox"]:not(:checked) + .wpcf7-list-item-label::after,
+[type="checkbox"]:checked + .wpcf7-list-item-label::after {
+  content: '';
+  background: url('../icons/checkbox-active.svg') no-repeat center center;
+  background-size: contain;
+}
+[type="radio"]:not(:checked) + .wpcf7-list-item-label::after,
+[type="radio"]:checked + .wpcf7-list-item-label::after {
+  content: '';
+  background: url('../icons/radio-active.svg') no-repeat center center;
+  background-size: contain;
+}
+
+// --- Checked items aspect changes
+[type="checkbox"]:not(:checked) + .wpcf7-list-item-label::after,
+[type="radio"]:not(:checked) + .wpcf7-list-item-label::after {
+  opacity: 0;
+}
+[type="checkbox"]:checked + .wpcf7-list-item-label::after,
+[type="radio"]:checked + .wpcf7-list-item-label::after {
+  opacity: 1;
+}

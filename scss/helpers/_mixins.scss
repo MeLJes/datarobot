@@ -1,0 +1,341 @@
+/* Mixins
+ *
+ * font                  — Set font size & weight. Pass third parameter as 'gradient' to add CSS rules for gradient support
+ * flex                  — Set element flex properties
+ * touch                 — Set pointer-events and user-select CSS properties
+ * position              — Set element z-index and position
+ * padding               — Set element paddings
+ * centering-flex        — Centering element with flex properties
+ * centering-position    — Centering element with position and transform properties
+ * tr                    — Transitions
+ * width                 — Set element width and max-width
+ * square                — Set equal width & height
+ * square-max            — Set equal width, height, max-width & max-height
+ * ratio-sn-land         — Set 16:9 ratio (Landscape)
+ * ratio-sn-port         — Set 16:9 ratio (Portrait)
+ * ratio-a4-land         — Set 99:70 ratio (A4, Landscape)
+ * ratio-a4-port         — Set 99:70 ratio (A4, Portrait)
+ * scrollbar             — Change scroll bar colors
+ * placeholder           — Change input placeholder style
+ * placeholder-remove    — Remove placeholder on click
+ * input-autofill        — Change autofill color
+ * clearfix              — Add clearfix for floating elements
+ *
+ */
+
+@mixin font(
+  $font-size: 16,
+  $font-weight: regular,
+  $gradient: false
+  ) {
+
+  font-size: px-to-rem($font-size);
+  font-weight: weight($font-weight);
+
+  @if $gradient == gradient {
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+@mixin flex(
+  $display: flex,
+  $justify-content: flex-start,
+  $align-items: flex-start,
+  $direction: row,
+  $wrap: nowrap
+  ) {
+
+  display: $display;
+  justify-content: $justify-content;
+  align-items: $align-items;
+  flex-direction: $direction;
+  flex-wrap: $wrap;
+}
+
+@mixin touch($property: auto) {
+  user-select: $property;
+  pointer-events: $property;
+}
+
+@mixin position(
+  $index,
+  $position: relative,
+  $top: auto,
+  $right: auto,
+  $bottom: auto,
+  $left: auto,
+  $unit: px
+  ) {
+
+  z-index: z($index);
+  position: $position;
+
+  @if $top == auto {
+    top: auto;
+  }  @else {
+    @if $unit == px {
+      top: px-to-rem($top);
+    } @else {
+      top: #{$top}$unit;
+    }
+  }
+
+  @if $right == auto {
+    right: auto;
+  }  @else {
+    @if $unit == px {
+      right: px-to-rem($right);
+    } @else {
+      right: #{$right}$unit;
+    }
+  }
+
+  @if $bottom == auto {
+    bottom: auto;
+  }  @else {
+    @if $unit == px {
+      bottom: px-to-rem($bottom);
+    } @else {
+      bottom: #{$bottom}$unit;
+    }
+  }
+
+  @if $left == auto {
+    left: auto;
+  }  @else {
+    @if $unit == px {
+      left: px-to-rem($left);
+    } @else {
+      left: #{$left}$unit;
+    }
+  }
+}
+
+@mixin padding(
+  $top: 0,
+  $right: 0,
+  $bottom: 0,
+  $left: 0,
+  $unit: px
+  ) {
+
+  @if $unit == px {
+    padding: px-to-rem($top) px-to-rem($right) px-to-rem($bottom) px-to-rem($left);
+  } @else {
+    padding: #{$top}$unit #{$right}$unit #{$bottom}$unit #{$left}$unit;
+  }
+}
+
+@mixin centering-flex {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin centering-position(
+  $index: default
+  ) {
+
+  transform: translate(-50%, -50%);
+
+  z-index: z($index);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+
+@mixin tr(
+  $property: all,
+  $duration: 0.2,
+  $timing-function: ease-in-out
+  ) {
+
+  transition: $property #{$duration}s $timing-function;
+}
+
+@mixin width(
+  $width,
+  $unit: px,
+  $width-max: none,
+  $unit-max: px,
+  ) {
+
+  @if $unit == full {
+    width: 100%;
+  } @else if $unit == px {
+    width: px-to-rem($width);
+  } @else {
+    width: #{$width}$unit;
+  }
+
+  @if $width-max == full {
+    max-width: 100%;
+  } @else if $width-max == none {
+    max-width: none;
+  } @else {
+    @if $unit-max == px {
+      max-width: px-to-rem($width-max);
+    } @else {
+      max-width: #{$width-max}$unit;
+    }
+  }
+}
+
+@mixin square(
+  $width,
+  $unit: px,
+  $height: $width
+  ) {
+
+  @if $unit == px {
+    width: px-to-rem($width);
+    height: px-to-rem($height);
+  } @else {
+    width: #{$width}$unit;
+    height: #{$height}$unit;
+  }
+}
+
+@mixin square-max(
+  $width,
+  $max-width,
+  $unit: px,
+  $height: $width,
+  $max-height: $max-width
+  ) {
+
+  @if $unit == px {
+    width: px-to-rem($width);
+    max-width: px-to-rem($max-width);
+    height: px-to-rem($height);
+    max-height: px-to-rem($max-height);
+  } @else {
+    width: #{$width}$unit;
+    max-width: #{$max-width}$unit;
+    height: #{$height}$unit;
+    max-height: #{$max-height}$unit;
+  }
+}
+
+@mixin ratio-sn-land(
+  $width,
+  $unit: px
+  ) {
+
+  @if $unit == px {
+    width: px-to-rem($width);
+    height: px-to-rem($width / 1.77777777778);
+  } @else {
+    width: #{$width}$unit;
+    height: #{($width / 1.77777777778)}$unit;
+  }
+}
+
+@mixin ratio-sn-port(
+  $width,
+  $unit: px
+  ) {
+
+  @if $unit == px {
+    width: px-to-rem($width);
+    height: px-to-rem($width * 1.77777777778);
+  } @else {
+    width: #{$width}$unit;
+    height: #{($width * 1.77777777778)}$unit;
+  }
+}
+
+@mixin ratio-a4-land(
+  $width,
+  $unit: px
+  ) {
+
+  @if $unit == px {
+    width: px-to-rem($width);
+    height: px-to-rem($width / 1.41428571429);
+  } @else {
+    width: #{$width}$unit;
+    height: #{($width / 1.41428571429)}$unit;
+  }
+}
+
+@mixin ratio-a4-port(
+  $width,
+  $unit: px
+  ) {
+
+  @if $unit == px {
+    width: px-to-rem($width);
+    height: px-to-rem($width * 1.41428571429);
+  } @else {
+    width: #{$width}$unit;
+    height: #{($width * 1.41428571429)}$unit;
+  }
+}
+
+@mixin scrollbar(
+  $scroll: primary,
+  $panel: light-gray
+  ) {
+
+  &::-webkit-scrollbar-thumb {
+    background: color($scroll);
+    border-radius: px-to-rem(10);
+    width: px-to-rem(10);
+    height: px-to-rem(10);
+  }
+  &::-webkit-scrollbar {
+    background: color($panel);
+    width: px-to-rem(3);
+    height: px-to-rem(3);
+  }
+}
+
+@mixin placeholder(
+  $color: default,
+  $font-size: 16,
+  $font-weight: regular
+  ) {
+
+  ::-webkit-input-placeholder { color: color($color); font-size: px-to-em($font-size); font-weight: weight($font-weight); }
+  ::-moz-placeholder          { color: color($color); font-size: px-to-em($font-size); font-weight: weight($font-weight); }
+  :-moz-placeholder           { color: color($color); font-size: px-to-em($font-size); font-weight: weight($font-weight); }
+  :-ms-input-placeholder      { color: color($color); font-size: px-to-em($font-size); font-weight: weight($font-weight); }
+}
+
+@mixin placeholder-remove(
+  $color: transparent
+  ) {
+
+  input:focus::-webkit-input-placeholder { color: $color; }
+  input:focus::-moz-placeholder          { color: $color; }
+  input:focus:-moz-placeholder           { color: $color; }
+  input:focus:-ms-input-placeholder      { color: $color; }
+}
+
+@mixin input-autofill {
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  textarea:-webkit-autofill,
+  textarea:-webkit-autofill:hover,
+  textarea:-webkit-autofill:focus,
+  select:-webkit-autofill,
+  select:-webkit-autofill:hover,
+  select:-webkit-autofill:focus {
+    -webkit-text-fill-color: #fff;
+    -webkit-box-shadow: 0 0 0 1000px rgba(255,255,255,0.01) inset;
+    box-shadow: 0 0 0 1000px rgba(255,255,255,0.01) inset;
+    transition: background-color 5000s ease-in-out 0s;
+  }
+}
+
+@mixin clearfix {
+  &:after {
+    content: '';
+    display: table;
+    clear: both;
+  }
+}

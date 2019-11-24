@@ -1,0 +1,113 @@
+// --- CF7 elements
+.form-wrapper {
+  // --- Preloader
+  .ajax-loader {
+    @include square(25, px);
+    @include position(base, absolute, auto, 0, 0, auto);
+
+    background: url('../icons/loaders/preloader.svg') no-repeat center;
+    background-size: cover;
+  }
+
+  // --- Response output
+  .wpcf7-response-output {
+    @include square(50, px);
+
+    border: none;
+    color: transparent;
+    font-size: 0;
+    padding: 0;
+    margin: 0;
+
+    @include position(base, relative);
+  }
+  .wpcf7-validation-errors,
+  .wpcf7-acceptance-missing,
+  .wpcf7-mail-sent-ok {
+    &::after {
+      content: '';
+      display: block;
+
+      @include centering-position;
+      @include square(45, px);
+    }
+  }
+  .wpcf7-validation-errors,
+  .wpcf7-acceptance-missing {
+    &::after {
+      background: url('../icons/warning.svg') no-repeat center;
+      background-size: cover;
+    }
+  }
+  .wpcf7-mail-sent-ok {
+    &::after {
+      background: url('../icons/send.svg') no-repeat center;
+      background-size: contain;
+    }
+  }
+  .wpcf7-not-valid-tip {
+    color: color(error);
+    font-size: px-to-rem(14);
+
+    position: absolute;
+    top: calc(100% + #{px-to-rem(14)});
+    left: px-to-rem(10);
+  }
+
+  // --- Components
+  .wpcf7-list-item {
+    margin: 0;
+  }
+  .wpcf7-list-item-label {
+    display: block;
+  }
+  .wpcf7-form-control-wrap {
+    position: static;
+  }
+}
+
+// --- Fields settings
+.field {
+  @include width(auto, full, 450, px);
+  @include tr();
+
+  position: relative;
+
+  &:not(:last-child) {
+    margin-bottom: px-to-rem(30);
+  }
+  input,
+  textarea {
+    @include padding(30, 30, 15, 30, px);
+
+    box-shadow: $shadow;
+    width: 100%;
+  }
+  input {
+    height: px-to-rem(70);
+  }
+  textarea {
+    resize: none;
+  }
+  .field-title {
+    font-size: px-to-rem(18);
+    transform: translate(0, -#{px-to-rem(25)});
+    pointer-events: none;
+
+    @include tr(all, 0.2);
+    @include position(default, auto, auto, 0, 30, px);
+
+    .wpcf7-form-control-wrap.focus + & {
+      color: color(primary);
+      font-size: px-to-rem(14);
+      transform: translate(0, -#{px-to-rem(45)});
+    }
+  }
+
+  // --- Privacy policy
+  &.checkbox {
+    a {
+      padding-left: px-to-em(45);
+    }
+  }
+}

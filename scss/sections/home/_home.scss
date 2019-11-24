@@ -1,0 +1,280 @@
+.main-content {
+  @include width(100, full, 1440, px);
+  @include padding(103, 120, 103, 120);
+
+  margin: 0 auto;
+
+  h1,
+  #dropdown,
+  #positions .item {
+    @include width(100, full, 588, px);
+  }
+  .header,
+  #positions {
+    width: 100%;
+  }
+  #dropdown button,
+  #positions .item {
+    border-radius: px-to-rem(6);
+  }
+
+  // --- Header
+  h1 {
+    @include font(37, bold);
+
+    line-height: px-to-rem(43);
+  }
+  .header {
+    @include flex(flex, space-between, flex-end);
+
+    margin-bottom: px-to-rem(48);
+
+    z-index: 1;
+    position: relative;
+  }
+  #dropdown {
+    @include flex(flex, flex-end, flex-end);
+    @include width(100, full, 282, px);
+
+    position: relative;
+
+    #active-item,
+    li {
+      @include padding(7, 32, 7, 16, px);
+
+      line-height: px-to-rem(26);
+      height: px-to-rem(40);
+
+      position: relative;
+    }
+    #active-item {
+      border: px-to-rem(1) solid color(secondary);
+      font-family: $font-secondary;
+      color: color(secondary);
+      text-align: left;
+      width: 100%;
+
+      &::after {
+        content: '';
+        display: block;
+        background: url('../icons/dropdown.svg') no-repeat center;
+        background-size: cover;
+
+        width: px-to-rem(10);
+        height: px-to-rem(6);
+        transform: translateY(-50%);
+
+        position: absolute;
+        top: 50%;
+        right: px-to-rem(14);
+      }
+    }
+    #dropdown-items {
+      background: color(extra);
+      border-radius: px-to-rem(6);
+      box-shadow: 0px 2px 4px rgba(54, 77, 114, 0.18), 0px 6px 8px rgba(54, 77, 114, 0.08);
+      padding: px-to-rem(4);
+      width: 100%;
+      max-height: px-to-rem(150);
+      overflow-y: scroll;
+      opacity: 0;
+
+      position: absolute;
+      top: 100%;
+      right: 0;
+      left: 0;
+
+      @include touch(none);
+      @include tr;
+      @include scrollbar(secondary);
+
+      &.active {
+        opacity: 1;
+
+        @include touch(auto);
+      }
+    }
+    li {
+      border-radius: px-to-rem(4);
+      cursor: pointer;
+
+      @include tr;
+
+      &:hover {
+        background: color(white);
+        box-shadow: 0px 2px 4px rgba(54, 77, 114, 0.18), 0px 6px 8px rgba(54, 77, 114, 0.08);
+      }
+    }
+  }
+
+  // --- Positions
+  #positions {
+    @include flex(flex, space-between, flex-start, row, wrap);
+
+    margin-bottom: px-to-rem(40);
+
+    .item {
+      border: px-to-rem(1) solid color(light-gray);
+      padding: px-to-rem(24);
+      margin-bottom: px-to-rem(24);
+    }
+    h2,
+    .info {
+      margin-bottom: px-to-rem(17);
+    }
+    h2 a:hover,
+    .more {
+      color: color(primary);
+    }
+    h2 {
+      @include font(22, semi-bold);
+
+      line-height: px-to-rem(30);
+    }
+    .info {
+      @include flex(flex, flex-start, flex-start);
+    }
+    .city,
+    .department {
+      @include flex(flex, flex-start, flex-start);
+
+      color: color(secondary);
+      font-size: px-to-rem(14);
+      line-height: px-to-rem(24);
+      position: relative;
+
+      .media-holder {
+        @include flex(flex, center, center);
+        @include square(24, px);
+
+        margin-right: px-to-rem(5);
+      }
+      img {
+        content: '';
+        display: block;
+        transform: translateY(-50%);
+
+        position: absolute;
+        top: 50%;
+      }
+    }
+    .city {
+      margin-right: px-to-rem(25);
+    }
+    .more {
+      @include flex(flex, flex-start, center);
+      @include font(16, semi-bold);
+
+      img {
+        margin-left: px-to-rem(12);
+
+        @include tr;
+      }
+      &:hover {
+        img {
+          margin-left: px-to-rem(16);
+        }
+      }
+    }
+  }
+
+  // --- Pagination
+  .pagination {
+    opacity: 0;
+    transform: translateY(10%);
+
+    @include touch(none);
+
+    &.active {
+      opacity: 1;
+      transform: translateY(0);
+
+      @include touch(auto);
+    }
+    &,
+    .item {
+      @include flex(flex, center, center);
+      @include tr;
+    }
+
+    background: color(extra);
+    border-radius: px-to-rem(6);
+    padding: px-to-rem(4);
+    margin: 0 auto;
+    max-width: px-to-rem(328);
+
+    .item {
+      cursor: pointer;
+      border-radius: px-to-rem(4);
+      color: color(secondary);
+      font-weight: weight(semi-bold);
+      line-height: px-to-rem(28);
+      width: px-to-rem(38);
+      height: px-to-rem(32);
+
+      &:not(:first-child):not(:last-child) {
+        margin: 0 px-to-rem(4);
+      }
+      &:hover,
+      &.active {
+        background: #FFFFFF;
+        box-shadow: 0px 2px 4px rgba(54, 77, 114, 0.18), 0px 6px 8px rgba(54, 77, 114, 0.08);
+
+        color: color(default);
+      }
+    }
+  }
+}
+
+@media screen and (min-width: breakpoint(zero)) and (max-width: breakpoint(extra-small-max)) {
+  .main-content {
+    @include padding(40, 50, 40, 50);
+
+    h1 {
+      font-size: px-to-rem(24);
+      line-height: px-to-rem(30);
+      margin-bottom: px-to-rem(20);
+    }
+    .header {
+      flex-wrap: wrap;
+    }
+    #positions {
+      margin-bottom: px-to-rem(20);
+
+      h2 {
+        font-size: px-to-rem(18);
+      }
+      .info {
+        flex-wrap: wrap;
+      }
+      .more {
+        font-size: px-to-rem(14);
+      }
+    }
+    .pagination {
+      margin-bottom: px-to-rem(40);
+    }
+  }
+}
+@media screen and (min-width: px-to-rem(600)) and (max-width: px-to-rem(1450)) {
+  .main-content {
+    #positions {
+      .item {
+        width: calc(50% - 12px);
+      }
+    }
+  }
+}
+@media screen and (min-width: breakpoint(small)) and (max-width: breakpoint(small-max)) {
+  .main-content {
+    @include padding(50, 70, 50, 70);
+
+    h1 {
+      font-size: px-to-rem(30);
+      line-height: px-to-rem(38);
+    }
+    .pagination {
+      margin-bottom: px-to-rem(50);
+    }
+  }
+}

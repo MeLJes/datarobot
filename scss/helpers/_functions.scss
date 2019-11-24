@@ -1,0 +1,53 @@
+/* Functions
+ *
+ * px-to-rem() | px-to-em()   — convert PX to EM or REM
+ * color()                    — pick color from palette
+ * weight()                   — set font-weight property
+ * z()                        — set z-index property
+ * breakpoint()               — set breakpoint name from the list below as an argument. Number value will converted to REM
+ *
+ */
+
+@function px-to-em($pixels, $context: $default-size) {
+  @return #{$pixels / $context}em;
+}
+
+@function px-to-rem($pixels, $context: $default-size) {
+  @return #{$pixels / $context}rem;
+}
+
+@function color($key) {
+  @if map-has-key($colors, $key) {
+    @return map-get($colors, $key);
+  }
+
+  @warn "Unknown `#{$key}` in $colors.";
+  @return null;
+}
+
+@function weight($weight) {
+  @if map-has-key($weights, $weight) {
+    @return map-get($weights, $weight);
+  }
+
+  @warn "Unknown `#{$weight}` in $weights.";
+  @return null;
+}
+
+@function z($key) {
+  @if map-has-key($z-layers, $key) {
+    @return map-get($z-layers, $key);
+  }
+
+  @warn "Unknown `#{$key}` in $z-layers.";
+  @return null;
+}
+
+@function breakpoint($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    @return px-to-rem( map-get($breakpoints, $breakpoint) );
+  }
+
+  @warn "Unknown `#{$breakpoint}` in $breakpoints.";
+  @return null;
+}

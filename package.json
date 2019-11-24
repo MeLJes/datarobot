@@ -1,0 +1,26 @@
+{
+  "name": "erwin-starter-kit",
+  "version": "2.0.0",
+  "description": "ERWIN Starter Kit - is a set of SCSS and JS code snippets that helps to start any web-project quickly and easily",
+  "author": "MeLJes",
+  "license": "ISC",
+  "scripts": {},
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-sass": "^4.0.2",
+    "gulp-sourcemaps": "^2.6.5",
+    "gulp-autoprefixer": "^7.0.0",
+    "gulp-clean-css": "^4.2.0",
+    "gulp-terser": "^1.2.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-rename": "^1.4.0",
+    "browser-sync": "^2.26.7",
+    "path": "^0.12.7",
+    "cross-env": "^5.2.0",
+    "del": "^5.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MeLJes/starter-kit.git"
+  }
+}

@@ -1,0 +1,85 @@
+html,
+body {
+  height: 100%;
+}
+html {
+  overflow-y: scroll;
+
+  &,
+  *:not(img) {
+    box-sizing: border-box;
+  }
+}
+body {
+  color: color(default);
+  position: relative;
+
+  @include flex(flex, flex-start, stretch, column);
+}
+*:not(img) {
+  outline: none;
+  margin: 0;
+  padding: 0;
+
+  &:before,
+  &:after {
+    box-sizing: inherit;
+  }
+}
+section {
+  position: relative;
+}
+ul,
+ol {
+  list-style: none;
+  padding: 0;
+}
+svg {
+  width: 100%;
+  height: 100%;
+}
+img,
+object,
+embed {
+  height: auto;
+  max-width: 100%;
+}
+button {
+  cursor: pointer;
+}
+button,
+fieldset,
+input,
+textarea {
+  background: none;
+  border: none;
+  border-radius: 0;
+
+  @include tr;
+}
+input,
+textarea {
+  -moz-appearance: textfield;
+  -webkit-appearance: none;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type=number] {
+  -moz-appearance:textfield;
+}
+form {
+  position: relative;
+}
+a,
+a:hover,
+a:active,
+a:focus,
+a:visited {
+  color: inherit;
+  text-decoration: none;
+
+  @include tr;
+}

@@ -1,0 +1,65 @@
+// --- Sections
+.main-content {
+  @include flex(flex, flex-start, flex-start, column);
+  @include tr;
+
+  height: 100%;
+}
+.container {
+  width: 100%;
+  height: inherit;
+  margin: 0 auto;
+  padding: 0 px-to-rem($container-padding);
+  position: relative;
+}
+
+// --- Helpers
+.update-pending {
+  display: block;
+  text-align: center;
+  width: 100%;
+}
+.button-holder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.link-block {
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+.text-no-wrap {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.video-player {
+  padding-bottom: 56.25%;
+  height: 0;
+  position: relative;
+
+  iframe,
+  img {
+    width: 100%;
+    height: 100%;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+}
+
+// --- Other
+.dn,
+.svg-sprite {
+  display: none !important;
+}
+.sf {
+  flex: 1;
+}
+.backspace {
+  backface-visibility: hidden;
+}

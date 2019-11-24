@@ -1,0 +1,73 @@
+// --- Font families
+$font-default: 'Titillium Web', sans-serif;
+$font-secondary: 'Roboto', sans-serif;
+
+// --- Font weights
+$weights: (
+  light: 300,
+  regular: normal,
+  medium: 500,
+  semi-bold: 600,
+  bold: 700,
+  extra-bold: 800,
+  black: 900
+);
+
+// --- Colors
+$colors: (
+  // --- Main
+  default: var(--default),
+  primary: var(--primary),
+  secondary: var(--secondary),
+  extra: var(--extra),
+
+  // --- Additional
+  white: var(--white),
+  black: var(--black),
+  gray: var(--gray),
+  light-gray: var(--light-gray),
+  dark-gray: var(--dark-gray),
+
+  // --- Alerts
+  success: var(--success),
+  warning: var(--warning),
+  error: var(--error)
+);
+
+// --- Z-index
+$z-layers: (
+  // --- Main
+  back: -1,
+  base: 0,
+  default: 1,
+
+  // --- Additional
+  overlay: 999,
+  extended: 9999
+);
+
+// --- Breakpoints
+$breakpoints: (
+  zero: 0,
+  zero-max: 478,
+  extra-small: 480,
+  extra-small-max: 767,
+  small: 768,
+  small-max: 991,
+  medium: 992,
+  medium-max: 1199,
+  large: 1200,
+  large-max: 1599,
+  extra-large: 1600,
+  extra-large-max: 1999,
+  huge: 2000
+);
+
+// --- Container
+$container-max: 1200;
+$container-padding: 30;
+
+// --- Default values
+$default-size: 16;
+$default-radius: 5;
+$shadow: 1px 1px 20px -6px rgba(var(--default),0.45);
