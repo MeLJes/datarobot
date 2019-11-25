@@ -58,9 +58,9 @@ async function getData() {
       positions.classList.remove('loaded');
 
       setTimeout(function () {
-        positions.innerHTML = jobs.map(function (item) {
+        positions.innerHTML = jobs.map(function (item, i) {
           return `
-        <div class="item" data-item-number="" data-item-department="${item.departments}">
+        <div class="item" data-item-number="${i+1}" data-item-department="${item.departments}">
           <h2 data-position="${item.title}">
             <a href="${item.absolute_url}">${item.title}</a>
           </h2>
@@ -90,6 +90,8 @@ async function getData() {
           </a><!-- .more -->
         </div><!-- .item -->`;
         }).join('');
+
+        _pagination(jobs);
       }, 250);
 
       setTimeout(function () {
@@ -102,12 +104,11 @@ async function getData() {
 
         return jobsCounter;
       }, {});
-      let jobsCheck = Object.keys(jobsCounter).forEach(function(item) {
+      Object.keys(jobsCounter).forEach(function(item) {
         if (item === departmentId) {
           loopCheck = 1;
         }
       });
-
 
       if (loopCheck === 1) {
         positions.classList.remove('loaded');
@@ -117,9 +118,9 @@ async function getData() {
             return item.departments == parseInt(departmentId);
           });
 
-          positions.innerHTML = jobsFiltered.map(function (item) {
+          positions.innerHTML = jobsFiltered.map(function (item, i) {
             return `
-          <div class="item" data-item-number="" data-item-department="${item.departments}">
+          <div class="item" data-item-number="${i+1}" data-item-department="${item.departments}">
             <h2 data-position="${item.title}">
               <a href="${item.absolute_url}">${item.title}</a>
             </h2>
@@ -149,6 +150,8 @@ async function getData() {
             </a><!-- .more -->
           </div><!-- .item -->`;
           }).join('');
+
+          _pagination(jobsFiltered);
         }, 250);
 
         setTimeout(function () {
@@ -168,6 +171,34 @@ async function getData() {
     }
   }
   _positionsRender();
+
+  // --- Pagination
+  const paginationHolder = document.getElementById('pagination');
+
+
+  function _pagination(jobsArray) {
+    if (jobsArray.length >= 11) {
+      console.log(document.querySelectorAll('#positions .item').length);
+
+      let paginationItems = [];
+
+      for (let i = 1; i <= Math.ceil(jobsArray.length / 10); i++) {
+        paginationItems.push(i);
+      }
+
+      paginationHolder.innerHTML = paginationItems.map(function (item) {
+        return `<div class="item" data-page-number="${item}">${item}</div><!-- .item -->`;
+      }).join('');
+
+      document.querySelectorAll('#pagination .item')[0].classList.add('active');
+      paginationHolder.classList.add('active');
+
+      // --- Set item number for position items
+      jobsArray.forEach(function(item) {
+        // console.log(item);
+      });
+    }
+  }
 }
 getData();
 

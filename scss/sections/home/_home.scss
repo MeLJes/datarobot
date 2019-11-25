@@ -2,6 +2,7 @@
   @include width(100, full, 1440, px);
   @include padding(103, 120, 103, 120);
 
+  height: auto;
   margin: 0 auto;
 
   h1,
@@ -187,7 +188,7 @@
   }
 
   // --- Pagination
-  .pagination {
+  #pagination {
     opacity: 0;
     transform: translateY(10%);
 
@@ -259,9 +260,9 @@
         font-size: px-to-rem(14);
       }
     }
-    .pagination {
+    /*#pagination {
       margin-bottom: px-to-rem(40);
-    }
+    }*/
   }
 }
 @media screen and (min-width: px-to-rem(600)) and (max-width: px-to-rem(1450)) {
@@ -281,8 +282,8 @@
       font-size: px-to-rem(30);
       line-height: px-to-rem(38);
     }
-    .pagination {
+    /*#pagination {
       margin-bottom: px-to-rem(50);
-    }
+    }*/
   }
 }
