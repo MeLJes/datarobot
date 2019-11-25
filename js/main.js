@@ -239,6 +239,10 @@ async function getData() {
         positions.classList.remove('loaded');
 
         setTimeout(function () {
+          if (dropdown.classList.contains('active')) {
+            dropdown.classList.remove('active');
+          }
+
           document.querySelectorAll('#positions .item').forEach(function (element) {
             element.classList.remove('hide-element');
 
