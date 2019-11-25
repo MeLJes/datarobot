@@ -60,7 +60,7 @@ async function getData() {
       setTimeout(function () {
         positions.innerHTML = jobs.map(function (item, i) {
           return `
-        <div class="item" data-item-number="${i+1}" data-item-department="${item.departments}">
+        <div class="item" data-item-number="${i + 10}" data-item-department="${item.departments}">
           <h2 data-position="${item.title}">
             <a href="${item.absolute_url}">${item.title}</a>
           </h2>
@@ -120,7 +120,7 @@ async function getData() {
 
           positions.innerHTML = jobsFiltered.map(function (item, i) {
             return `
-          <div class="item" data-item-number="${i+1}" data-item-department="${item.departments}">
+          <div class="item" data-item-number="${i + 10}" data-item-department="${item.departments}">
             <h2 data-position="${item.title}">
               <a href="${item.absolute_url}">${item.title}</a>
             </h2>
@@ -177,12 +177,13 @@ async function getData() {
 
 
   function _pagination(jobsArray) {
-    if (jobsArray.length >= 11) {
-      console.log(document.querySelectorAll('#positions .item').length);
+    let positionItemsCount = document.querySelectorAll('#positions .item');
 
+    if (positionItemsCount.length >= 11) {
+      // console.log('in');
       let paginationItems = [];
 
-      for (let i = 1; i <= Math.ceil(jobsArray.length / 10); i++) {
+      for (let i = 1; i <= Math.ceil(positionItemsCount.length / 10); i++) {
         paginationItems.push(i);
       }
 
@@ -192,11 +193,10 @@ async function getData() {
 
       document.querySelectorAll('#pagination .item')[0].classList.add('active');
       paginationHolder.classList.add('active');
-
-      // --- Set item number for position items
-      jobsArray.forEach(function(item) {
-        // console.log(item);
-      });
+    } else {
+      // console.log('out');
+      paginationHolder.innerHTML = '';
+      paginationHolder.classList.remove('active');
     }
   }
 }
