@@ -175,7 +175,6 @@ async function getData() {
   // --- Pagination
   const paginationHolder = document.getElementById('pagination');
 
-
   function _pagination(jobsArray) {
     let positionItemsCount = document.querySelectorAll('#positions .item');
 
@@ -193,12 +192,60 @@ async function getData() {
 
       document.querySelectorAll('#pagination .item')[0].classList.add('active');
       paginationHolder.classList.add('active');
+
+      pagClick(document.querySelectorAll('#pagination .item'));
     } else {
       // console.log('out');
       paginationHolder.innerHTML = '';
       paginationHolder.classList.remove('active');
     }
   }
+
+  // --- Pagination - Item click
+  let getSiblings = function (elem) {
+
+    // Setup siblings array and get the first sibling
+    var siblings = [];
+    var sibling = elem.parentNode.firstChild;
+
+    // Loop through each sibling and push to the array
+    while (sibling) {
+      if (sibling.nodeType === 1) {
+        siblings.push(sibling);
+      }
+      sibling = sibling.nextSibling
+    }
+
+    return siblings;
+  };
+
+  function pagClick(item) {
+    item.forEach(function (item) {
+      // --- Hide elements from other pages
+      document.querySelectorAll('#positions .item').forEach(function (element) {
+        if (element.dataset.itemNumber.charAt(0) != 1) {
+          element.classList.add('hide-element');
+        }
+      });
+
+      item.addEventListener('click', function() {
+        document.querySelectorAll('#positions .item').forEach(function(element) {
+          element.classList.remove('hide-element');
+
+          if (element.dataset.itemNumber.charAt(0) !== item.dataset.pageNumber) {
+            element.classList.add('hide-element');
+          }
+        });
+
+        getSiblings(item).forEach(function(item) {
+          item.classList.remove('active');
+        });
+
+        item.classList.add('active');
+      });
+    });
+  }
+
 }
 getData();
 
