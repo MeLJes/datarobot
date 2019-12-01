@@ -2,6 +2,8 @@ async function getData() {
   const response = await fetch('https://api.jsonbin.io/b/5dd7cefb040d843991f7183c');
   const data = await response.json();
 
+  console.log(data);
+
   // --- Dropdown
   const dropdown = document.getElementById('dropdown-items');
   const dropdownActive = document.getElementById('active-item');
